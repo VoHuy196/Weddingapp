@@ -18,6 +18,7 @@ const RSVP: FC = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -46,6 +47,7 @@ const RSVP: FC = () => {
       if (response.ok) {
         console.log('RSVP Form Data sent to Sheet.best', formData);
         setSubmitted(true);
+        setError(null);
         // reset form immediately
         setFormData({
           name: '',
@@ -60,6 +62,7 @@ const RSVP: FC = () => {
       } else {
         const text = await response.text();
         console.error('Sheet.best returned error', response.status, text);
+        setError(`Server error ${response.status}: ${text}`);
       }
     } catch (err) {
       console.error('Network error sending RSVP', err);
@@ -203,6 +206,15 @@ const RSVP: FC = () => {
               className="mt-4 p-4 bg-green-50 border-2 border-green-300 rounded-lg text-green-700 text-center font-semibold"
             >
               Cảm ơn! Chúng tôi đã nhận được xác nhận của bạn 💕
+            </motion.div>
+          )}
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 p-4 bg-red-50 border-2 border-red-300 rounded-lg text-red-700 text-center font-semibold"
+            >
+              {error}
             </motion.div>
           )}
         </motion.form>
