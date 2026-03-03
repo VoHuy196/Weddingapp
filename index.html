@@ -9,11 +9,11 @@
   <body>
     <div id="root"></div>
     <!--
-      Use the special %BASE_URL% variable so that Vite will replace it with
-      the value of `base` when building. This avoids hard‑coding leading
-      slashes that point to the host root and instead respects the repo path.
-      After build the tag will reference the compiled JS in `dist/assets`.
+      Vite will resolve a relative path during build, so we can use a
+      relative import instead of an absolute one. This ensures that after
+      compiling the correct JS file in `dist` is referenced regardless of the
+      base path.
     -->
-    <script type="module" src="%BASE_URL%src/main.tsx"></script>
+    <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>
