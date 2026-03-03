@@ -17,6 +17,7 @@ const RSVP: FC = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -26,25 +27,45 @@ const RSVP: FC = () => {
     }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    // Log dữ liệu ra console
-    console.log('RSVP Form Data:', formData);
-    
-    // Hiển thị thông báo thành công
-    setSubmitted(true);
-    
-    // Reset form sau 3 giây
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        phone: '',
-        message: '',
-        attendance: 'yes',
-      });
-      setSubmitted(false);
-    }, 3000);
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    try {
+      // gửi dữ liệu đến sheet.best
+      const response = await fetch(
+        'https://api.sheetbest.com/sheets/95fa570c-5998-4de8-a4e2-1fed5fca22ba',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        console.log('RSVP Form Data sent to Sheet.best', formData);
+        setSubmitted(true);
+        // reset form immediately
+        setFormData({
+          name: '',
+          phone: '',
+          message: '',
+          attendance: 'yes',
+        });
+        // clear success message after a few seconds
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 3000);
+      } else {
+        const text = await response.text();
+        console.error('Sheet.best returned error', response.status, text);
+      }
+    } catch (err) {
+      console.error('Network error sending RSVP', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -165,9 +186,14 @@ const RSVP: FC = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             type="submit"
-            className="w-full btn-primary"
+            disabled={isSubmitting}
+            className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {submitted ? '✓ Cảm ơn bạn!' : 'Gửi Xác Nhận'}
+            {isSubmitting
+              ? 'Đang gửi…'
+              : submitted
+              ? '✓ Cảm ơn bạn!'
+              : 'Gửi Xác Nhận'}
           </motion.button>
 
           {submitted && (
