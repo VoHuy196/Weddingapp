@@ -52,8 +52,8 @@ const RSVP: FC = () => {
         setFormData({
           name: '',
           phone: '',
-          message: '',
           attendance: 'yes',
+          message: '',
         });
         // clear success message after a few seconds
         setTimeout(() => {
