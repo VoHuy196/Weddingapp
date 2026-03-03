@@ -19,7 +19,7 @@ const Hero: FC = () => {
   useEffect(() => {
     const calculateTimeLeft = () => {
       // Ngày cưới - thay đổi thành ngày cưới thực tế của bạn
-      const weddingDate = new Date('2024-12-15T17:00:00').getTime();
+      const weddingDate = new Date('2026-04-15T17:00:00').getTime();
       const now = new Date().getTime();
       const distance = weddingDate - now;
 
