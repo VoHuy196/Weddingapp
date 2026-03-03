@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { type FC } from 'react';
 import { motion } from 'framer-motion';
 
 const WeddingInfo: FC = () => {
@@ -197,7 +197,7 @@ const WeddingInfo: FC = () => {
           <iframe
             className="w-full h-96"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3823.8427897640827!2d104.92209759999999!3d21.029169700000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31341a2d0000bb1d%3A0x8f9f4d0c0d0d0d0d!2zSMOgIE7hu5lpIEJpbmggVMESb25nLCBWaWV0bmFt!5e0!3m2!1svi!2s!4v1234567890"
-            allowFullScreen=""
+            allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Image {

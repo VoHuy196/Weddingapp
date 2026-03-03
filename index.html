@@ -9,11 +9,10 @@
   <body>
     <div id="root"></div>
     <!--
-      Vite will resolve a relative path during build, so we can use a
-      relative import instead of an absolute one. This ensures that after
-      compiling the correct JS file in `dist` is referenced regardless of the
-      base path.
+      The entry-point for development and build is `/src/main.tsx`. Vite
+      resolves this path relative to the project root; the base option
+      controls only the resulting asset URLs in the generated HTML.
     -->
-    <script type="module" src="./src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

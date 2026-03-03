@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent, FormEvent } from 'react';
+import { type FC, useState, type ChangeEvent, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 
 interface FormData {
