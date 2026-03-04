@@ -96,8 +96,7 @@ const Hero: FC = () => {
           transition={{ delay: 0.9, duration: 0.8 }}
           className="text-gold-600 text-lg font-serif font-semibold mb-12"
         >
-          15 Tháng 12, 2024
-        </motion.p>
+          15 Tháng 4, 2026        </motion.p>
 
         {/* Countdown */}
         <motion.div
