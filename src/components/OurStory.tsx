@@ -25,7 +25,7 @@ const OurStory: FC = () => {
       description: 'Anh quỳ gối dưới ánh trăng và hỏi em: "Bạn có muốn là vợ của anh không?" 💍',
     },
     {
-      year: '2024',
+      year: '2026',
       title: 'Tình Yêu Trọn Vẹn',
       description: 'Chúng mình sắp nên vợ chồng và bắt đầu chương mới của tình yêu 👰💒',
     },

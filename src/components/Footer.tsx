@@ -83,7 +83,7 @@ const Footer: FC = () => {
           >
             <div className="text-3xl">💕</div>
             <p className="text-gray-400">
-              © 2024 Huy & Cô Dâu | Tạo với yêu thương
+              ©  2026 Huy & Cô Dâu | Tạo với yêu thương
             </p>
             <p className="text-gray-500 text-sm">
               "Tình yêu là chọn được cùng một người để yêu lâu dài" ❤️
