@@ -54,7 +54,7 @@ const WeddingInfo: FC = () => {
                 </svg>
                 <div>
                   <p className="font-semibold text-gray-800">Thời Gian</p>
-                  <p className="text-gray-600">15 Tháng 4, 2026 · 17:00 - 19:00</p>
+                  <p className="text-gray-600">16 Tháng 4, 2026 · 17:00 - 19:00</p>
                 </div>
               </div>
 
@@ -136,7 +136,7 @@ const WeddingInfo: FC = () => {
                 </svg>
                 <div>
                   <p className="font-semibold text-gray-800">Thời Gian</p>
-                  <p className="text-gray-600">15 Tháng 4, 2026 · 19:30 - 23:00</p>
+                  <p className="text-gray-600">16 Tháng 4, 2026 · 19:30 - 23:00</p>
                 </div>
               </div>
 

@@ -20,7 +20,7 @@ const OurStory: FC = () => {
       description: 'Thời gian ta dành cho nhau từ những bữa cơm đơn giản đến những chuyến du lịch xa xôi.',
     },
     {
-      year: '2022',
+      year: '2025',
       title: 'Lời Cầu Hôn',
       description: 'Anh quỳ gối dưới ánh trăng và hỏi em: "Bạn có muốn là vợ của anh không?" 💍',
     },

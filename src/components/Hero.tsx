@@ -19,7 +19,7 @@ const Hero: FC = () => {
   useEffect(() => {
     const calculateTimeLeft = () => {
       // Ngày cưới - thay đổi thành ngày cưới thực tế của bạn
-      const weddingDate = new Date('2026-04-15T17:00:00').getTime();
+      const weddingDate = new Date('2026-04-16T17:00:00').getTime();
       const now = new Date().getTime();
       const distance = weddingDate - now;
 
@@ -96,7 +96,7 @@ const Hero: FC = () => {
           transition={{ delay: 0.9, duration: 0.8 }}
           className="text-gold-600 text-lg font-serif font-semibold mb-12"
         >
-          15 Tháng 4, 2026        </motion.p>
+          16 Tháng 4, 2026        </motion.p>
 
         {/* Countdown */}
         <motion.div
