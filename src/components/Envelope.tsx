@@ -30,7 +30,6 @@ const Envelope: FC<EnvelopeProps> = ({ onComplete }) => {
       {visible && (
         <motion.div
           className="fixed inset-0 z-[200] overflow-hidden flex items-center justify-center"
-          style={{ background: '#C0181B' }} // Nền đỏ trùng màu thiệp
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >

@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import Envelope       from './components/Envelope';
+import Envelope from './components/Envelope';
 import InvitationCard from './components/InvitationCard';
-import Footer         from './components/Footer';
+import Footer from './components/Footer';
 
 function getGuestName(): string {
   const params = new URLSearchParams(window.location.search);
@@ -25,17 +24,19 @@ function App() {
       )}
 
       {/*
-        Pre-render nội dung nhưng ẩn bằng visibility:hidden trong lúc envelope còn.
-        Khi envelopeDone=true → visible ngay, không cần mount lại → không bị delay.
+        Dùng opacity:0 (không phải visibility:hidden) để IntersectionObserver
+        vẫn hoạt động → whileInView animations chạy ngầm trong khi envelope phủ.
+        Khi envelope xong → chuyển opacity:1 tức thì, không cần animation lại.
       */}
-      <motion.div
-        style={{ visibility: envelopeDone ? 'visible' : 'hidden' }}
-        animate={{ opacity: envelopeDone ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
-      >
+      <div style={{
+        opacity: envelopeDone ? 1 : 0,
+        transition: envelopeDone ? 'opacity 0.25s ease' : 'none',
+        // Ngăn scroll/interact khi đang ẩn
+        pointerEvents: envelopeDone ? 'auto' : 'none',
+      }}>
         <InvitationCard guestName={guestName} />
         <Footer />
-      </motion.div>
+      </div>
 
     </div>
   );
