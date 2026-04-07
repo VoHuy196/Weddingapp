@@ -11,6 +11,6 @@ export default defineConfig({
   // upper-case letters. The real repo is named "Weddingapp" so we must
   // match the casing in the base URL. Either rename the repo to all
   // lower-case or keep this value in sync with the URL you actually use.
-  base: '/Weddingapp/',
+  base: './',
   plugins: [react()],
 })
