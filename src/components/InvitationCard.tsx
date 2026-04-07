@@ -170,18 +170,22 @@ const ThankYouBanner: FC<{ guestName: string }> = ({ guestName }) => (
   <motion.div
     initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
     viewport={{ once: true }} transition={{ duration: 1.2 }}
-    className="relative w-full overflow-hidden"
-    style={{ minHeight: 340 }}
+    className="relative w-full"
   >
-    {/* Ảnh nền mờ */}
+    {/* Ảnh full – không crop, tự giãn theo chiều cao ảnh */}
     <img
       src={`${import.meta.env.BASE_URL}anh8.jpg`}
       alt=""
-      className="absolute inset-0 w-full h-full object-cover"
-      style={{ filter: 'blur(3px) brightness(0.42)', transform: 'scale(1.06)' }}
+      className="w-full block"
+      style={{ display: 'block' }}
     />
-    {/* Nội dung trung tâm */}
-    <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 py-16">
+
+    {/* Lớp phủ tối + mờ, phủ đúng theo kích thước ảnh */}
+    <div className="absolute inset-0"
+         style={{ background: 'rgba(0,0,0,0.52)', backdropFilter: 'blur(2px)' }} />
+
+    {/* Text overlay – căn giữa tuyệt đối */}
+    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
       <p style={{
         color: 'rgba(255,255,255,0.7)',
         fontSize: 12,
