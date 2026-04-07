@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
-import Envelope from './components/Envelope';
+import { AnimatePresence } from 'framer-motion';
+import Envelope      from './components/Envelope';
 import InvitationCard from './components/InvitationCard';
-import Footer from './components/Footer';
+import RSVPModal     from './components/RSVPModal';
 
 function getGuestName(): string {
   const params = new URLSearchParams(window.location.search);
@@ -10,33 +11,33 @@ function getGuestName(): string {
 }
 
 function App() {
-  const [envelopeDone, setEnvelopeDone] = useState(false);
+  const [envelopeVisible, setEnvelopeVisible] = useState(true);
+  const [modalOpen,       setModalOpen]       = useState(false);
   const guestName = getGuestName();
 
-  const handleEnvelopeComplete = useCallback(() => setEnvelopeDone(true), []);
+  const handleEnvelopeComplete = useCallback(() => setEnvelopeVisible(false), []);
 
   return (
-    <div className="bg-white">
+    <div className="relative min-h-screen bg-white">
 
-      {/* Envelope overlay – tự ẩn khi xong */}
-      {!envelopeDone && (
-        <Envelope guestName={guestName} onComplete={handleEnvelopeComplete} />
-      )}
+      {/* Nội dung chính – luôn nằm sẵn dưới lớp Envelope */}
+      <main className="relative z-10">
+        <InvitationCard guestName={guestName} onOpenModal={() => setModalOpen(true)} />
+      </main>
 
-      {/*
-        Dùng opacity:0 (không phải visibility:hidden) để IntersectionObserver
-        vẫn hoạt động → whileInView animations chạy ngầm trong khi envelope phủ.
-        Khi envelope xong → chuyển opacity:1 tức thì, không cần animation lại.
-      */}
-      <div style={{
-        opacity: envelopeDone ? 1 : 0,
-        transition: envelopeDone ? 'opacity 0.25s ease' : 'none',
-        // Ngăn scroll/interact khi đang ẩn
-        pointerEvents: envelopeDone ? 'auto' : 'none',
-      }}>
-        <InvitationCard guestName={guestName} />
-        <Footer />
-      </div>
+      {/* Envelope overlay */}
+      <AnimatePresence>
+        {envelopeVisible && (
+          <Envelope onComplete={handleEnvelopeComplete} />
+        )}
+      </AnimatePresence>
+
+      {/* RSVP / Lời chúc modal */}
+      <AnimatePresence>
+        {modalOpen && (
+          <RSVPModal guestName={guestName} onClose={() => setModalOpen(false)} />
+        )}
+      </AnimatePresence>
 
     </div>
   );

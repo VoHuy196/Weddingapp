@@ -20,63 +20,112 @@ const PageBorder: FC = () => (
   </div>
 );
 
-// ─── Song Hỷ + fringe ─────────────────────────────────────────────────────────
-const SongHy: FC = () => (
-  <div className="flex flex-col items-center mb-6">
-    <div className="flex items-center justify-center rounded-full border-4 shadow-lg"
-      style={{ width: 96, height: 96, background: '#D62828', borderColor: '#D4AF37' }}>
-      <span style={{ color: '#fff', fontSize: 44, fontFamily: 'serif', lineHeight: 1 }}>囍</span>
+// ─── URLs ảnh assets trang trí ───────────────────────────────────────────────
+const B = import.meta.env.BASE_URL;
+const IMG = {
+  chuhy2: `${B}chuhy2.png`,
+  longden: `${B}longden.png`,
+  trangtri: `${B}trangtri.png`,
+};
+
+/** Phần trang trí đầu trang: đèn lồng + chữ Hỷ + nút thắt */
+const HeroDecor: FC = () => (
+  <div className="flex flex-col items-center w-full mb-2">
+    {/* Container chứa đèn lồng và chữ Hỷ */}
+    <div className="relative flex items-center justify-between w-full px-4" style={{ minHeight: 140 }}>
+
+      {/* Đèn lồng trái (mirrored) */}
+      <div className="flex-1 flex justify-start">
+        <img
+          src={IMG.longden}
+          alt=""
+          style={{
+            width: 'clamp(64px, 14vw, 110px)',
+            transform: 'scaleX(-1)',
+            opacity: 0.9
+          }}
+        />
+      </div>
+
+      {/* Chữ Hỷ chính giữa */}
+      <div className="flex-none">
+        <img
+          src={IMG.chuhy2}
+          alt="Song Hỷ"
+          style={{
+            width: 'clamp(90px, 20vw, 140px)',
+            zIndex: 10,
+            position: 'relative'
+          }}
+        />
+      </div>
+
+      {/* Đèn lồng phải */}
+      <div className="flex-1 flex justify-end">
+        <img
+          src={IMG.longden}
+          alt=""
+          style={{
+            width: 'clamp(64px, 14vw, 110px)',
+            opacity: 0.9
+          }}
+        />
+      </div>
+
     </div>
-    <div className="flex gap-1 mt-2">
-      {[14, 18, 22, 26, 22, 30, 22, 26, 22, 18, 14].map((h, i) => (
-        <div key={i} className="flex flex-col items-center gap-0.5">
-          <div style={{ width: 2, height: h, background: '#D4AF37', borderRadius: 1 }} />
-          <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#D4AF37' }} />
-        </div>
-      ))}
-    </div>
+
+    {/* Nút thắt trang trí bên dưới */}
+    <img
+      src={IMG.trangtri}
+      alt=""
+      style={{
+        width: 'clamp(40px, 9vw, 64px)',
+        marginTop: -10, // Kéo lên một chút để chạm vào chữ Hỷ cho đẹp
+        opacity: 0.8
+      }}
+    />
   </div>
 );
 
 // ─── Divider ──────────────────────────────────────────────────────────────────
 const GoldDivider: FC = () => (
   <div className="flex items-center gap-3 my-6 w-full max-w-xs mx-auto">
-    <div className="flex-1 h-px" style={{ background: '#D4AF37' }} />
-    <span style={{ color: '#D4AF37', fontSize: 16 }}>✦</span>
-    <div className="flex-1 h-px" style={{ background: '#D4AF37' }} />
+    <div className="flex-1 h-px" style={{ background: '#C8102E' }} />
+    <span style={{ color: '#C8102E', fontSize: 16 }}>✦</span>
+    <div className="flex-1 h-px" style={{ background: '#C8102E' }} />
   </div>
 );
 
 // ─── Event card ──────────────────────────────────────────────────────────────
 interface EventInfo {
-  title:    string;
-  time:     string;
+  title: string;
+  time: string;
   dayLabel: string;
-  date:     string;
-  lunar:    string;
-  venue:    string;
+  date: string;
+  lunar: string;
+  venue: string;
   address?: string;
-  mapUrl?:  string;
+  mapUrl?: string;
 }
 
 const EventCard: FC<EventInfo> = ({ title, time, dayLabel, date, lunar, venue, address, mapUrl }) => (
-  <div className="rounded-2xl border p-5 text-center" style={{ borderColor: '#D4AF3355', background: '#fffdf8' }}>
+  <div className="rounded-2xl border p-5 text-center" style={{ borderColor: '#C8102E33', background: '#ffffff' }}>
     <p className="text-xs font-bold tracking-widest uppercase mb-2"
-       style={{ color: '#D4AF37', fontFamily: 'Quicksand, sans-serif', letterSpacing: '0.2em' }}>
+      style={{ color: '#C8102E', fontFamily: 'Quicksand, sans-serif', letterSpacing: '0.2em' }}>
       {title}
     </p>
-    <p className="text-2xl font-bold" style={{ color: '#D62828', fontFamily: 'Quicksand, sans-serif' }}>{time}</p>
+    <p className="text-2xl font-bold" style={{ color: '#C8102E', fontFamily: 'Quicksand, sans-serif' }}>{time}</p>
     <p className="text-sm font-semibold text-gray-700 mt-1" style={{ fontFamily: 'Quicksand, sans-serif' }}>
       {dayLabel} · {date}
     </p>
     <p className="text-xs text-gray-500 mt-0.5" style={{ fontFamily: 'Quicksand, sans-serif' }}>{lunar}</p>
-    <div className="my-3 h-px w-10 mx-auto" style={{ background: '#D4AF37' }} />
+    <div className="my-3 h-px w-10 mx-auto" style={{ background: '#C8102E' }} />
     <p className="text-sm font-semibold text-gray-800" style={{ fontFamily: 'Quicksand, sans-serif' }}>{venue}</p>
     {address && <p className="text-xs text-gray-500 mt-1 leading-relaxed" style={{ fontFamily: 'Quicksand, sans-serif' }}>{address}</p>}
     {mapUrl && (
       <a href={mapUrl} target="_blank" rel="noopener noreferrer"
-         className="inline-block mt-3 px-4 py-1.5 rounded-full text-xs font-bold border transition-colors"
-         style={{ borderColor: '#D62828', color: '#D62828', fontFamily: 'Quicksand, sans-serif' }}>
+        className="inline-block mt-3 px-4 py-1.5 rounded-full text-xs font-bold border transition-colors"
+        style={{ borderColor: '#C8102E', color: '#C8102E', fontFamily: 'Quicksand, sans-serif' }}>
         📍 Xem bản đồ
       </a>
     )}
@@ -92,10 +141,10 @@ const PHOTOS: string[] = [
 const PhotoGallery: FC = () => (
   <section className="py-12 px-4">
     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ duration: 0.7 }}
-                className="text-center mb-8">
+      viewport={{ once: true }} transition={{ duration: 0.7 }}
+      className="text-center mb-8">
       <p className="text-xs font-bold tracking-widest uppercase mb-2"
-         style={{ color: '#D4AF37', fontFamily: 'Quicksand, sans-serif', letterSpacing: '0.25em' }}>
+        style={{ color: '#C8102E', fontFamily: 'Quicksand, sans-serif', letterSpacing: '0.25em' }}>
         ✦ Khoảnh Khắc ✦
       </p>
       <h2 className="font-serif text-2xl md:text-3xl text-gray-800">Những Khoảnh Khắc Đẹp</h2>
@@ -106,17 +155,17 @@ const PhotoGallery: FC = () => (
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}
           className="aspect-square rounded-xl overflow-hidden shadow-md"
-          style={{ background: '#f9f5ef', border: '1px solid #D4AF3344' }}>
+          style={{ background: '#fff5f7', border: '1px solid #C8102E22' }}>
           {src ? (
             <img src={src} alt={`Ảnh ${i + 1}`}
-                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center gap-2 opacity-40">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                <circle cx="12" cy="13" r="4"/>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C8102E" strokeWidth="1.5">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                <circle cx="12" cy="13" r="4" />
               </svg>
-              <span style={{ fontSize: 11, color: '#D4AF37', fontFamily: 'Quicksand, sans-serif' }}>Ảnh {i + 1}</span>
+              <span style={{ fontSize: 11, color: '#C8102E', fontFamily: 'Quicksand, sans-serif' }}>Ảnh {i + 1}</span>
             </div>
           )}
         </motion.div>
@@ -127,16 +176,19 @@ const PhotoGallery: FC = () => (
 
 // ─── Fade-up helper ───────────────────────────────────────────────────────────
 const fadeUp = (delay = 0) => ({
-  initial:     { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
-  viewport:    { once: true },
-  transition:  { duration: 0.75, delay },
+  viewport: { once: true },
+  transition: { duration: 0.75, delay },
 });
 
 // ─── Main InvitationCard ──────────────────────────────────────────────────────
-interface InvitationCardProps { guestName: string; }
+interface InvitationCardProps {
+  guestName: string;
+  onOpenModal: () => void;
+}
 
-const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
+const InvitationCard: FC<InvitationCardProps> = ({ guestName, onOpenModal }) => {
   // ═══════════════════════════════════════════════════════
   //  🎊 THÔNG TIN CẶP ĐÔI – chỉnh sửa tại đây
   // ═══════════════════════════════════════════════════════
@@ -145,58 +197,58 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
 
   // Để father rỗng ('') nếu không có / đã mất
   const GROOM_FAMILY = {
-    father:  '',
-    mother:  'Vũ Thị Mỵ',
+    father: '',
+    mother: 'Vũ Thị Mỵ',
     address: 'Nam Hồng, Tiền Hải, Thái Bình (cũ)',
   };
   const BRIDE_FAMILY = {
-    father:  'Nguyễn Trọng Phương',
-    mother:  'Nguyễn Thị Lê',
+    father: 'Nguyễn Trọng Phương',
+    mother: 'Nguyễn Thị Lê',
     address: '14/93 Trần Xuân Soạn, P. Đông Thọ, TP. Thanh Hóa',
   };
 
   // ── Các sự kiện ──────────────────────────────────────
   const EVENTS_TRAI: EventInfo[] = [
     {
-      title:    'Lễ Thành Hôn',
-      time:     '11:15',
+      title: 'Lễ Thành Hôn',
+      time: '11:15',
       dayLabel: 'Thứ Tư',
-      date:     '22/04/2026',
-      lunar:    'Mùng 6 tháng 3 năm Bính Ngọ',
-      venue:    'Tư gia nhà trai',
-      address:  'Nam Hồng, Tiền Hải, Thái Bình',
+      date: '22/04/2026',
+      lunar: 'Mùng 6 tháng 3 năm Bính Ngọ',
+      venue: 'Tư gia nhà trai',
+      address: 'Nam Hồng, Tiền Hải, Thái Bình',
     },
     {
-      title:    'Tiệc Mừng Lễ Thành Hôn',
-      time:     '17:30',
+      title: 'Tiệc Mừng Lễ Thành Hôn',
+      time: '17:30',
       dayLabel: 'Thứ Ba',
-      date:     '21/04/2026',
-      lunar:    'Mùng 5 tháng 3 năm Bính Ngọ',
-      venue:    'Tư gia nhà trai',
-      address:  'Nam Hồng, Tiền Hải, Thái Bình (cũ)',
-      mapUrl:   'https://www.google.com/maps/place//@20.3272472,106.5081915,19z/data=!3m1!4b1!4m6!1m5!3m4!2zMjDCsDE5JzM4LjMiTiAxMDbCsDMwJzI4LjciRQ!8m2!3d20.3273056!4d106.5079722?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
+      date: '21/04/2026',
+      lunar: 'Mùng 5 tháng 3 năm Bính Ngọ',
+      venue: 'Tư gia nhà trai',
+      address: 'Nam Hồng, Tiền Hải, Thái Bình (cũ)',
+      mapUrl: 'https://www.google.com/maps/place//@20.3272472,106.5081915,19z/data=!3m1!4b1!4m6!1m5!3m4!2zMjDCsDE5JzM4LjMiTiAxMDbCsDMwJzI4LjciRQ!8m2!3d20.3273056!4d106.5079722?entry=ttu&g_ep=EgoyMDI2MDQwMS4wIKXMDSoASAFQAw%3D%3D',
     },
   ];
 
   const EVENTS_GAI: EventInfo[] = [
     {
-      title:    'Lễ Nạp Tài',
-      time:     '15:00',
+      title: 'Lễ Nạp Tài',
+      time: '15:00',
       dayLabel: 'Thứ Bảy',
-      date:     '18/04/2026',
-      lunar:    'Mùng 2 tháng 3 năm Bính Ngọ',
-      venue:    'Tư gia nhà gái',
-      address:  'P. Hàm Rồng, TP. Thanh Hóa',
+      date: '18/04/2026',
+      lunar: 'Mùng 2 tháng 3 năm Bính Ngọ',
+      venue: 'Tư gia nhà gái',
+      address: 'P. Hàm Rồng, TP. Thanh Hóa',
     },
     {
-      title:    'Tiệc Mừng Lễ Nạp Tài',
-      time:     '17:15',
+      title: 'Tiệc Mừng Lễ Nạp Tài',
+      time: '17:15',
       dayLabel: 'Thứ Bảy',
-      date:     '18/04/2026',
-      lunar:    'Mùng 2 tháng 3 năm Bính Ngọ',
-      venue:    'Nhà khách Z111',
-      address:  '284 Bà Triệu, P. Hàm Rồng, TP. Thanh Hóa',
-      mapUrl:   'https://maps.app.goo.gl/rgxg5XzKvSQkKpwb6',
+      date: '18/04/2026',
+      lunar: 'Mùng 2 tháng 3 năm Bính Ngọ',
+      venue: 'Nhà khách Z111',
+      address: '284 Bà Triệu, P. Hàm Rồng, TP. Thanh Hóa',
+      mapUrl: 'https://maps.app.goo.gl/rgxg5XzKvSQkKpwb6',
     },
   ];
   // ═══════════════════════════════════════════════════════
@@ -208,24 +260,32 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
       <PageBorder />
 
       <main className="relative bg-transparent"
-            style={{ paddingLeft: 'clamp(28px,5vw,56px)', paddingRight: 'clamp(28px,5vw,56px)' }}>
+        style={{ paddingLeft: 'clamp(28px,5vw,56px)', paddingRight: 'clamp(28px,5vw,56px)' }}>
 
         {/* ── Header ───────────────────────────────────── */}
         <section className="flex flex-col items-center text-center pt-12 pb-8">
 
           <motion.p {...fadeUp(0)} className="text-xs font-bold tracking-widest uppercase mb-3"
-            style={{ color: '#D4AF37', ...sf, letterSpacing: '0.3em' }}>
-            🌸&ensp;Kính Mời&ensp;🌸
+            style={{ color: '#C8102E', ...sf, letterSpacing: '0.3em' }}>
+            Kính Mời
           </motion.p>
 
+
           <motion.p {...fadeUp(0.08)} className="text-lg font-bold mb-5"
-            style={{ color: '#D62828', ...sf }}>
+            style={{ color: '#C8102E', ...sf }}>
             {guestName}
           </motion.p>
 
           <GoldDivider />
 
-          <motion.div {...fadeUp(0.15)}><SongHy /></motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
+            <HeroDecor />
+          </motion.div>
 
           <motion.p {...fadeUp(0.2)} className="text-sm tracking-widest text-gray-600 mt-2 mb-4"
             style={{ ...sf, letterSpacing: '0.15em' }}>
@@ -238,7 +298,7 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
               {GROOM}
             </span>
             <span className="block font-serif font-bold"
-                  style={{ fontSize: 'clamp(30px,5vw,48px)', color: '#D62828', lineHeight: 1.5 }}>
+              style={{ fontSize: 'clamp(30px,5vw,48px)', color: '#C8102E', lineHeight: 1.5 }}>
               &amp;
             </span>
             <span style={{ fontFamily: "'Great Vibes','Dancing Script',cursive", fontSize: 'clamp(58px,11vw,96px)', color: '#1a1a1a', lineHeight: 1.1 }}>
@@ -252,16 +312,16 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
         {/* ── Thông tin phụ huynh ──────────────────────── */}
         <motion.section {...fadeUp(0)}
           className="py-8 border-t border-b max-w-2xl mx-auto w-full"
-          style={{ borderColor: '#D4AF3344' }}>
+          style={{ borderColor: '#C8102E22' }}>
           <div className="relative flex flex-col sm:flex-row gap-6">
             {/* vertical divider */}
             <div className="hidden sm:block absolute left-1/2 top-2 bottom-2 w-px -translate-x-1/2"
-                 style={{ background: '#D4AF3766' }} />
+              style={{ background: '#C8102E66' }} />
 
             {/* NHÀ TRAI */}
             <div className="flex-1 text-center px-3">
               <p className="text-xs font-bold tracking-widest uppercase mb-3"
-                 style={{ color: '#D4AF37', ...sf, letterSpacing: '0.22em' }}>NHÀ TRAI</p>
+                style={{ color: '#C8102E', ...sf, letterSpacing: '0.22em' }}>NHÀ TRAI</p>
               {GROOM_FAMILY.father && (
                 <p className="text-sm font-semibold text-gray-700" style={sf}>
                   Ông <strong className="text-gray-900">{GROOM_FAMILY.father}</strong>
@@ -271,7 +331,7 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
                 {GROOM_FAMILY.father ? '& ' : ''}Bà <strong className="text-gray-900">{GROOM_FAMILY.mother}</strong>
               </p>
               <p className="text-xs text-gray-500 mt-1" style={sf}>{GROOM_FAMILY.address}</p>
-              <div className="mt-3 h-px w-10 mx-auto" style={{ background: '#D4AF37' }} />
+              <div className="mt-3 h-px w-10 mx-auto" style={{ background: '#C8102E' }} />
               <p className="mt-2 text-xs tracking-widest uppercase text-gray-500" style={sf}>Chú Rể</p>
               <p className="font-bold text-gray-900" style={{ ...sf, fontSize: 16 }}>{GROOM}</p>
             </div>
@@ -279,7 +339,7 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
             {/* NHÀ GÁI */}
             <div className="flex-1 text-center px-3">
               <p className="text-xs font-bold tracking-widest uppercase mb-3"
-                 style={{ color: '#D4AF37', ...sf, letterSpacing: '0.22em' }}>NHÀ GÁI</p>
+                style={{ color: '#C8102E', ...sf, letterSpacing: '0.22em' }}>NHÀ GÁI</p>
               {BRIDE_FAMILY.father && (
                 <p className="text-sm font-semibold text-gray-700" style={sf}>
                   Ông <strong className="text-gray-900">{BRIDE_FAMILY.father}</strong>
@@ -289,7 +349,7 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
                 {BRIDE_FAMILY.father ? '& ' : ''}Bà <strong className="text-gray-900">{BRIDE_FAMILY.mother}</strong>
               </p>
               <p className="text-xs text-gray-500 mt-1" style={sf}>{BRIDE_FAMILY.address}</p>
-              <div className="mt-3 h-px w-10 mx-auto" style={{ background: '#D4AF37' }} />
+              <div className="mt-3 h-px w-10 mx-auto" style={{ background: '#C8102E' }} />
               <p className="mt-2 text-xs tracking-widest uppercase text-gray-500" style={sf}>Cô Dâu</p>
               <p className="font-bold text-gray-900" style={{ ...sf, fontSize: 16 }}>{BRIDE}</p>
             </div>
@@ -299,7 +359,7 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
         {/* ── Events NHÀ TRAI ──────────────────────────── */}
         <motion.section {...fadeUp(0)} className="py-10 max-w-2xl mx-auto w-full">
           <p className="text-center text-xs font-bold tracking-widest uppercase mb-6"
-             style={{ color: '#D4AF37', ...sf, letterSpacing: '0.25em' }}>✦ Lịch Nhà Trai ✦</p>
+            style={{ color: '#C8102E', ...sf, letterSpacing: '0.25em' }}>✦ Lịch Nhà Trai ✦</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {EVENTS_TRAI.map((ev) => <EventCard key={ev.title} {...ev} />)}
           </div>
@@ -307,36 +367,49 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName }) => {
 
         {/* Ornamental divider */}
         <div className="w-full max-w-xs mx-auto flex items-center gap-3 mb-2">
-          <div className="flex-1 h-px" style={{ background: '#D4AF3788' }} />
-          <span style={{ color: '#D4AF37', fontSize: 20 }}>❧</span>
-          <div className="flex-1 h-px" style={{ background: '#D4AF3788' }} />
+          <div className="flex-1 h-px" style={{ background: '#C8102E88' }} />
+          <span style={{ color: '#C8102E', fontSize: 20 }}>❧</span>
+          <div className="flex-1 h-px" style={{ background: '#C8102E88' }} />
         </div>
 
         {/* ── Events NHÀ GÁI ───────────────────────────── */}
         <motion.section {...fadeUp(0)} className="py-10 max-w-2xl mx-auto w-full">
           <p className="text-center text-xs font-bold tracking-widest uppercase mb-6"
-             style={{ color: '#D4AF37', ...sf, letterSpacing: '0.25em' }}>✦ Lịch Nhà Gái ✦</p>
+            style={{ color: '#C8102E', ...sf, letterSpacing: '0.25em' }}>✦ Lịch Nhà Gái ✦</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {EVENTS_GAI.map((ev) => <EventCard key={ev.title} {...ev} />)}
           </div>
         </motion.section>
 
-        {/* ── Lời mời ──────────────────────────────────── */}
-        <motion.section {...fadeUp(0)} className="py-8 text-center max-w-lg mx-auto">
-          <div className="rounded-2xl border p-6" style={{ borderColor: '#D4AF3344', background: '#fffdf8' }}>
-            <p className="text-2xl mb-2">💕</p>
-            <p className="text-sm text-gray-600 leading-relaxed" style={sf}>
-              Sự hiện diện của&nbsp;
-              <span className="font-bold" style={{ color: '#D62828' }}>{guestName}</span>
-              &nbsp;chính là niềm hạnh phúc lớn nhất của chúng mình trong ngày đặc biệt này.
-            </p>
+        {/* ── CTA Buttons ─────────────────────────────────── */}
+        <motion.section {...fadeUp(0)} className="py-10 text-center max-w-lg mx-auto">
+          <p className="text-sm text-gray-500 mb-6 leading-relaxed" style={sf}>
+            Sự hiện diện của&nbsp;
+            <span className="font-bold" style={{ color: '#C8102E' }}>{guestName}</span>
+            &nbsp;chính là niềm hạnh phúc lớn nhất của chúng mình 💕
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <button
+              onClick={onOpenModal}
+              className="px-8 py-4 rounded-2xl font-bold text-white text-sm shadow-lg"
+              style={{ ...sf, background: 'linear-gradient(135deg, #C8102E, #9e0d23)', letterSpacing: '0.05em' }}
+            >
+              ✅ Xác nhận tham dự
+            </button>
+            <button
+              onClick={onOpenModal}
+              className="px-8 py-4 rounded-2xl font-bold text-sm shadow-md border-2"
+              style={{ ...sf, borderColor: '#C8102E', color: '#C8102E', background: '#fff', letterSpacing: '0.05em' }}
+            >
+              💌 Gửi lời chúc
+            </button>
           </div>
         </motion.section>
 
       </main>
 
       {/* ── Gallery ảnh ──────────────────────────────────── */}
-      <div style={{ paddingLeft: 'clamp(28px,5vw,56px)', paddingRight: 'clamp(28px,5vw,56px)' }}>
+      <div style={{ paddingLeft: 'clamp(28px,5vw,56px)', paddingRight: 'clamp(28px,5vw,56px)', paddingBottom: '2rem' }}>
         <PhotoGallery />
       </div>
     </div>
