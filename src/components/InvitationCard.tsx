@@ -133,10 +133,12 @@ const EventCard: FC<EventInfo> = ({ title, time, dayLabel, date, lunar, venue, a
 );
 
 // ─── Photo Gallery ────────────────────────────────────────────────────────────
-// ✏️ Điền URL ảnh vào mảng bên dưới (có thể thêm hoặc bớt phần tử)
+const _B = import.meta.env.BASE_URL;
 const PHOTOS: string[] = [
-  '', '', '', '', '', '',
-];
+  'anh1.jpg', 'anh2.jpg', 'anh3.jpg',
+  'anh4.jpg', 'anh5.jpg', 'anh6.jpg',
+  'anh7.jpg', 'anh9.jpg',
+].map(f => `${_B}${f}`);
 
 const PhotoGallery: FC = () => (
   <section className="py-12 px-4">
@@ -149,29 +151,82 @@ const PhotoGallery: FC = () => (
       </p>
       <h2 className="font-serif text-2xl md:text-3xl text-gray-800">Những Khoảnh Khắc Đẹp</h2>
     </motion.div>
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-3xl mx-auto">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto">
       {PHOTOS.map((src, i) => (
         <motion.div key={i}
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.08 }}
-          className="aspect-square rounded-xl overflow-hidden shadow-md"
-          style={{ background: '#fff5f7', border: '1px solid #C8102E22' }}>
-          {src ? (
-            <img src={src} alt={`Ảnh ${i + 1}`}
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center gap-2 opacity-40">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#C8102E" strokeWidth="1.5">
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                <circle cx="12" cy="13" r="4" />
-              </svg>
-              <span style={{ fontSize: 11, color: '#C8102E', fontFamily: 'Quicksand, sans-serif' }}>Ảnh {i + 1}</span>
-            </div>
-          )}
+          viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.07 }}
+          className="aspect-square rounded-xl overflow-hidden shadow-md">
+          <img src={src} alt={`Ảnh ${i + 1}`}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
         </motion.div>
       ))}
     </div>
   </section>
+);
+
+// ─── Thank You Banner (anh8) ────────────────────────────────────────────────
+const ThankYouBanner: FC<{ guestName: string }> = ({ guestName }) => (
+  <motion.div
+    initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+    viewport={{ once: true }} transition={{ duration: 1.2 }}
+    className="relative w-full overflow-hidden"
+    style={{ minHeight: 340 }}
+  >
+    {/* Ảnh nền mờ */}
+    <img
+      src={`${import.meta.env.BASE_URL}anh8.jpg`}
+      alt=""
+      className="absolute inset-0 w-full h-full object-cover"
+      style={{ filter: 'blur(3px) brightness(0.42)', transform: 'scale(1.06)' }}
+    />
+    {/* Nội dung trung tâm */}
+    <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 py-16">
+      <p style={{
+        color: 'rgba(255,255,255,0.7)',
+        fontSize: 12,
+        fontFamily: 'Quicksand, sans-serif',
+        letterSpacing: '0.3em',
+        textTransform: 'uppercase',
+        marginBottom: 16,
+      }}>
+        ❖ Cảm ơn ❖
+      </p>
+      <p style={{
+        fontFamily: "'Great Vibes','Dancing Script',cursive",
+        fontSize: 'clamp(42px, 9vw, 80px)',
+        color: '#ffffff',
+        lineHeight: 1.15,
+        textShadow: '0 2px 24px rgba(0,0,0,0.55)',
+      }}>
+        Cảm ơn {guestName}
+      </p>
+      <p style={{
+        marginTop: 16,
+        fontSize: 'clamp(13px, 2.5vw, 16px)',
+        lineHeight: 1.7,
+        color: 'rgba(255,255,255,0.82)',
+        fontFamily: 'Quicksand, sans-serif',
+        maxWidth: 440,
+      }}>
+        Sự hiện diện của bạn là món quà ý nghĩa nhất với chúng mình.<br />
+        Xin chân thành cảm ơn! 🌹
+      </p>
+      <div style={{
+        marginTop: 32,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 12,
+        color: 'rgba(255,255,255,0.55)',
+        fontFamily: 'Quicksand, sans-serif',
+        fontSize: 13,
+      }}>
+        <div style={{ width: 40, height: 1, background: 'rgba(255,255,255,0.35)' }} />
+        Phạm Tá &amp; Thu Huyền
+        <div style={{ width: 40, height: 1, background: 'rgba(255,255,255,0.35)' }} />
+      </div>
+    </div>
+  </motion.div>
 );
 
 // ─── Fade-up helper ───────────────────────────────────────────────────────────
@@ -409,9 +464,13 @@ const InvitationCard: FC<InvitationCardProps> = ({ guestName, onOpenModal }) => 
       </main>
 
       {/* ── Gallery ảnh ──────────────────────────────────── */}
-      <div style={{ paddingLeft: 'clamp(28px,5vw,56px)', paddingRight: 'clamp(28px,5vw,56px)', paddingBottom: '2rem' }}>
+      <div style={{ paddingLeft: 'clamp(28px,5vw,56px)', paddingRight: 'clamp(28px,5vw,56px)' }}>
         <PhotoGallery />
       </div>
+
+      {/* ── Thank You Banner ────────────────────────────── */}
+      <ThankYouBanner guestName={guestName} />
+
     </div>
   );
 };
