@@ -157,8 +157,10 @@ const PhotoGallery: FC = () => (
           initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.07 }}
           className="aspect-square rounded-xl overflow-hidden shadow-md">
-          <img src={src} alt={`Ảnh ${i + 1}`}
-            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+          <img
+            src={src}
+            alt={`Ảnh ${i + 1}`}
+            className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" />
         </motion.div>
       ))}
     </div>
@@ -182,7 +184,7 @@ const ThankYouBanner: FC<{ guestName: string }> = ({ guestName }) => (
 
     {/* Lớp phủ tối + mờ, phủ đúng theo kích thước ảnh */}
     <div className="absolute inset-0"
-         style={{ background: 'rgba(0,0,0,0.52)', backdropFilter: 'blur(2px)' }} />
+      style={{ background: 'rgba(0,0,0,0.52)', backdropFilter: 'blur(2px)' }} />
 
     {/* Text overlay – căn giữa tuyệt đối */}
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
