@@ -1,79 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&family=Lora:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:wght@400;500;600&display=swap');
 
 @import "tailwindcss";
 
 @theme {
-  --color-gold-50: #fffbf0;
-  --color-gold-100: #fef3e2;
-  --color-gold-200: #fde8c6;
-  --color-gold-300: #fcd89f;
-  --color-gold-400: #fbc36f;
-  --color-gold-500: #f9ae40;
-  --color-gold-600: #e8932d;
-  --color-gold-700: #c96b1f;
-  --color-gold-800: #b0521e;
-  --color-gold-900: #804219;
+  /* Crimson red */
+  --color-crimson-50:  #fff0f0;
+  --color-crimson-100: #ffd6d6;
+  --color-crimson-200: #ffaaaa;
+  --color-crimson-500: #D62828;
+  --color-crimson-600: #b51d1d;
+  --color-crimson-700: #8b0000;
 
-  --color-rose-50: #fdf2f8;
-  --color-rose-100: #fce7f3;
-  --color-rose-200: #fbcfe8;
-  --color-rose-300: #f8b4d9;
-  --color-rose-400: #f472b6;
+  /* Gold */
+  --color-gold-50:  #fffdf0;
+  --color-gold-100: #fef9e0;
+  --color-gold-200: #fdf0b8;
+  --color-gold-300: #f7d774;
+  --color-gold-400: #e5c547;
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #b8940a;
+  --color-gold-700: #967700;
+
+  /* Rose (kept for link creator / RSVP legacy) */
   --color-rose-500: #ec4899;
   --color-rose-600: #db2777;
-  --color-rose-700: #be185d;
-  --color-rose-800: #9d174d;
-  --color-rose-900: #831843;
 
-  --font-serif: 'Playfair Display', serif;
-  --font-sans: 'Lora', Georgia, serif;
-
-  --animate-fadeIn: fadeIn 0.6s ease-in-out;
+  /* Typography */
+  --font-calligraphy: 'Great Vibes', 'Dancing Script', cursive;
+  --font-serif:       'Playfair Display', Georgia, serif;
+  --font-sans:        'Quicksand', 'Lora', system-ui, sans-serif;
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-white text-gray-800 font-sans;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-bold;
-  }
-
-  h1 {
-    @apply text-4xl md:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-5xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl;
-  }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-white text-gray-900 font-sans; }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-8 py-3 bg-gold-500 text-white font-semibold rounded-lg hover:bg-gold-600 transition-colors duration-300;
+    @apply px-8 py-3 bg-crimson-500 text-white font-semibold rounded-lg
+           hover:bg-crimson-600 transition-colors duration-300;
   }
-
+  .btn-gold {
+    @apply px-8 py-3 bg-gold-500 text-white font-semibold rounded-lg
+           hover:bg-gold-600 transition-colors duration-300;
+  }
   .section-padding {
     @apply px-4 py-12 md:px-8 md:py-20;
   }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+
